@@ -1,4 +1,5 @@
-type User {
+const typeDefs=
+`type User {
     _id: ID
     username: String
     email: String
@@ -7,7 +8,8 @@ type User {
 }
 
 type Book {
-    authors: [String]
+    _id: ID!
+    authors: String
     description: String
     bookId: String
     image: String
@@ -17,14 +19,17 @@ type Book {
 
 type Auth {
     user: User,
-    token: ID
+    token: ID!
 }
 
-Query {
+type Query {
     getUsers: [User]
+    user(email: String): User
 }
 
 Mutation {
     createUser(username: String!, email: String!, password: String!): Auth
-}
-// deleteBook(userId:ID!, bookId: String!): User
+    deleteBook(userId:ID!, bookId: String!): User
+}`
+
+module.export = typeDefs;
