@@ -3,7 +3,6 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const { sign } = require('jsonwebtoken');
 
 const resolvers = {
-    Query: {
         Query: {
             me: async (parent, args, context) => {
                 if (context.user) {
@@ -13,7 +12,7 @@ const resolvers = {
             },
         },
         Mutation: {
-            AddUser: async ({ username, email, password }) => {
+            addUser: async ({ username, email, password }) => {
                 const user = await User.create({ username, email, password });
                 const token = signToken(user);
                 return { token, user };
@@ -63,6 +62,5 @@ const resolvers = {
                 throw AuthenticationError;
             },
         },
-    },
 };
 module.exports = resolvers;
