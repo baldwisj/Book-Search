@@ -8,7 +8,7 @@ const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schema');
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+// const setupProxy = require('./setupProxy');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -20,6 +20,8 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
+
+  // setupProxy(app);
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));

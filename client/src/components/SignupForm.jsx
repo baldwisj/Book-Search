@@ -35,7 +35,9 @@ const SignupForm = () => {
         variables: { ...userFormData },
       });
 
-      Auth.login(data.addUser.token)
+      console.log('data', data)
+
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -47,6 +49,7 @@ const SignupForm = () => {
       password: '',
     });
   };
+
 
   return (
     <>
