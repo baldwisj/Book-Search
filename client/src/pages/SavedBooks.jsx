@@ -18,8 +18,13 @@ const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
 
   const [deleteBook] = useMutation(REMOVE_BOOK);
- 
-  const userDataLength = Object.keys(userData).length;
+
+
+  useEffect(() => {
+    if (data) {
+      setUserData(data.me);
+    }
+  }, [data]);
 
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -32,7 +37,7 @@ const SavedBooks = () => {
 
     try {
 
-      await removeBookMutation({ variables: { bookId } });
+      await deleteBook({ variables: { bookId } });
 
       setUserData(data => {
         const updatedData = { ...data };
@@ -55,7 +60,7 @@ const SavedBooks = () => {
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <div className="text-light bg-dark p-5">
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
