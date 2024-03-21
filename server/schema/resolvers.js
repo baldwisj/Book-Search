@@ -1,7 +1,7 @@
 const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
-
+//These resolvers are called to ensure authentication when needed and call queries and mutations
 const resolvers = {
     Query: {
         me: async (parent, args, context) => {
